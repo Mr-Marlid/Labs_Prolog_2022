@@ -36,4 +36,10 @@ counter([H|T],Num,Count) :-
     counter(T,NewNum,Count).
 counter(List,Count):-counter(List,0,Count).
 
-
+indexOfMin([H|T], X):-indexOfMin(T, 1, 1, X, H).
+indexOfMin([], _, MinInd, MinInd, _):-!.
+indexOfMin([H|T], CurInd, _, X, CurMin):-
+	H > CurMin, NewCurInd is CurInd + 1,
+	indexOfMin(T, NewCurInd, NewCurInd, X, H), !.
+indexOfMin([_|T], CurInd, MinInd, X, CurMin):-
+	NewCurInd is CurInd + 1, indexOfMin(T, NewCurInd, MinInd, X, CurMin).
